@@ -34,7 +34,7 @@ def sign_in_view(request):
         me = auth.authenticate(request, email=email, password=password) # 사용자 불러오기
         if me is not None:  # 저장된 사용자의 패스워드와 입력받은 패스워드 비교
             auth.login(request, me)
-            return HttpResponse("로그인 성공")
+            return redirect('/')
         else: # 로그인이 실패하면 다시 로그인 페이지를 보여주기
             return redirect('/sign-in')
     elif request.method == 'GET':
