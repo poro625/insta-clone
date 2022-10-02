@@ -1,3 +1,4 @@
+{% block content %}
 <!doctype html>
 <html lang="en">
 
@@ -64,17 +65,27 @@
     <div class="sign_in_left_box" style="display: inline-block; margin: auto 10px auto auto;">
         왼쪽 영역
     </div>
-    <div class="sign_in_right_box" style="display: inline-block; margin: auto auto auto 10px">
-        <div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 40px 0 40px;">
-            <img style="width: 250px; margin: 50px auto 50px auto;" src="/static/img/logo.png" alt="로고">
-            <input class="form-control" style="margin-top: 5px;" placeholder="전화번호, 사용자 이름 또는 이메일">
-            <input class="form-control" style="margin-top: 5px;" placeholder="비밀번호">
-            <button type="button" class="btn btn-primary" style="margin-top: 20px; width: 100%;">로그인</button>
-            <div class="flex-direction_row" style="margin: 20px auto 20px auto;">
-                <hr style="width: 150px; margin: 20px 5px 20px 5px;"></hr><div style="margin: 10px 5px 20px 5px;">또는</div><hr style="width: 150px; margin: 20px 5px 20px 5px;"></hr>
-            </div>
-            <div style="margin-bottom: 20px;"><img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" style="width: 20px; height: 20px; margin-right: 5px;"> <b>Facebook으로 로그인</b></div>
-            <div><b>비밀번호를 잊으셨나요?</b></div>
+	<div class="sign_in_right_box" style="display: inline-block; margin: auto auto auto 10px">
+    <div class="flex-direction_row" style="width: 100%; text-align: center; place-items: center; min-height: 100vh; background-color: #139f73;">
+        <div class="sign_in_left_box" style="display: inline-block; margin: auto 10px auto auto;">
+            <h2 class="title-center"> 로그인</h2>
+            <form class="form-area" action="/sign-in/" method="post">
+                {% csrf_token %}
+                <div class="form-group mt-2 mb-2">
+                    <label for="email">이메일</label>
+                    <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label for="password">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <a href="/sign-up" class="btn btn-secondary">회원가입 페이지로</a>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
@@ -83,3 +94,4 @@
 
 
 </html>
+{% endblock %}
