@@ -3,6 +3,7 @@ from .models import UserModel
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model #사용자가 있는지 검사하는 함수
 from django.contrib import auth # 사용자 auth 기능
+from django.contrib.auth.decorators import login_required
 
 
 def sign_up_view(request):
@@ -47,3 +48,9 @@ def sign_in_view(request):
             return redirect('/')
         else:
             return render(request, 'user/signin.html')
+
+
+@login_required
+def logout(request):   #로그아웃 함수
+    auth.logout(request) # 인증 되어있는 정보를 없애기
+    return redirect("/")
