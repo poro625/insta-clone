@@ -13,4 +13,8 @@ def home(request):
 
 def content(request):
     if request.method == 'GET':
-        return render(request, 'content/home.html')
+        user = request.user.is_authenticated
+        if user:
+            return render(request, 'content/home.html')
+        else:
+            return redirect('/sign-in')

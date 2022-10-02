@@ -52,6 +52,11 @@
               <label for="floatingInput">비밀번호 확인</label>
             </div>
           </div>
+          {% if error %}
+              <div class="alert alert-danger" role="alert">
+                 {{ error }}
+             </div>
+          {% endif %}
             <button type="submit" class="btn btn-primary" style="width: 100%;">가입버튼</button>
         </div>
         <div style="padding: 20px ;text-align:center; border:solid 1px rgba(219, 219, 219, 1); width: 300px; height: 70px; margin-top: 30px; background: white">
