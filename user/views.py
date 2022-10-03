@@ -26,7 +26,7 @@ def sign_up_view(request):
             return render(request, 'user/signup.html', {'error': '패스워드를 확인 해 주세요!'})
         else:
             if email == '' or password == '':
-                return render(request, 'user/signup.html', {'error': '이메일과과 패스워드를 입력해주세요.'})
+                return render(request, 'user/signup.html', {'error': '이메일과 패스워드를 입력해주세요.'})
             
             exist_email = get_user_model().objects.filter(email=email)
             if exist_email:
