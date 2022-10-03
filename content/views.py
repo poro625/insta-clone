@@ -18,3 +18,6 @@ def content(request):
             return render(request, 'content/home.html')
         else:
             return redirect('/sign-in')
+
+def profile(request):
+    return render(request, 'content/profile.html')

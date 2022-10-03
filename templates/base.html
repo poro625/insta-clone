@@ -378,7 +378,7 @@
             <div>
             <form class="form-inline my-2 my-lg-0">
              {% if not user.is_authenticated %}
-                <span class="material-icons">home</span>
+                <a href="/content" span class="material-icons">home</span></a>
                 <span class="material-icons">send</span>
                 <span id="nav_bar_add_box" class="material-icons-outlined">add_box</span>
                 <span class="material-icons-outlined">explore</span>
@@ -387,16 +387,15 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" disabled>
                 <span class="nav-link">
-                    <span class="material-icons">home</span>
+                <a href="/content" span class="material-icons">home</span></a>
                 <span class="material-icons">send</span>
                 <span id="nav_bar_add_box" class="material-icons-outlined">add_box</span>
                 <span class="material-icons-outlined">explore</span>
                 <span id="nav_bar_rep_box" class="material-icons-outlined">favorite_border</span>
-                
-                </span>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout"> 로그아웃 </a>
+                <a class="nav-link" href="/profile"> 내 프로필</a>
             </li>
         </ul>
     {% endif %}
