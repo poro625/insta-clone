@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from .models import Feed
 import os
 from instagram.settings import MEDIA_ROOT
+from django.utils import timezone
 
 
 # Create your views here.
@@ -62,12 +63,22 @@ def DeleteFeed(request, id):
     feed.delete()
     return redirect('/content')
 
-def EditFeed(request, id):
-    return 
-
-
-
-
-
 def profile(request):
     return render(request, 'content/profile.html')
+
+def profile_edit(request):
+    return render(request, 'content/profile_edit.html')
+
+def profile_edit_password(request):
+    return render(request, 'content/profile_edit_password.html')
+
+## 사용자가 제출한 데이터를 저장
+def modify(request, id):
+    if request.method == 'POST':
+        feed = Feed.objects.get(id=id)
+        feed.content = request.POST.get('content')
+        feed.save()
+        return redirect("/")
+    
+def test(request):
+    return render(request, 'content/test.html')
