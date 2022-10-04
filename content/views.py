@@ -1,3 +1,4 @@
+
 from email.mime import image
 from turtle import update
 from uuid import uuid4
@@ -55,6 +56,18 @@ class UploadFeed(APIView):
         Feed.objects.create(image=image, content=content, user_id=user_id, profile_image=profile_image, like_count=0, created_at=created_at, updated_at=updated_at)
 
         return Response(status=200)
-    
+
+def DeleteFeed(request, id):
+    feed = Feed.objects.get(id=id)
+    feed.delete()
+    return redirect('/content')
+
+def EditFeed(request, id):
+    return 
+
+
+
+
+
 def profile(request):
     return render(request, 'content/profile.html')
