@@ -108,7 +108,7 @@ def change_password(request, id): # 비밀번호 수정
         return render(request, 'content/profile_edit_password.html')
 
 
-class UploadProfile(APIView):
+class UploadProfile(APIView): # 프로필 사진 업로드
     def post(self, request):
         print("test")
         # 일단 파일 불러와
@@ -133,7 +133,7 @@ class UploadProfile(APIView):
 
 # user/views.py 
 
-@login_required
+@login_required  # 팔로우, 팔로워 
 def user_view(request):
     if request.method == 'GET':
         # 사용자를 불러오기, exclude와 request.user.username 를 사용해서 '로그인 한 사용자'를 제외하기
@@ -141,7 +141,7 @@ def user_view(request):
         return render(request, 'user/user_list.html', {'user_list': user_list})
 
 
-@login_required
+@login_required # 팔로우, 팔로워 
 def user_follow(request, id):
     me = request.user
     click_user = UserModel.objects.get(id=id)

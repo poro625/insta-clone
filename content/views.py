@@ -6,11 +6,18 @@ from rest_framework.views import APIView
 from .models import Feed
 import os
 from instagram.settings import MEDIA_ROOT
+""" home - home 화면 접근
+    content - content 화면 접근
+    UploadFeed - 게시글 업로드
+    DeleteFeed - 게시글 삭제
+    modify - 게시글 수정
+    profile - 프로필페이지 접근
+    """
 
 
 # Create your views here.
 
-def home(request):
+def home(request): # home 화면
     if request.method == 'GET' :
         user = request.user.is_authenticated  # 사용자가 인증을 받았는지 (로그인이 되어있는지)
         if user:
@@ -20,7 +27,7 @@ def home(request):
             return redirect('/sign-in')
 
 
-def content(request):
+def content(request): # content 화면
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:
@@ -30,7 +37,7 @@ def content(request):
             return redirect('/sign-in')
 
 
-class UploadFeed(APIView):
+class UploadFeed(APIView): # 게시글 업로드
     def post(self, request):
 
         # 일단 파일 불러와
@@ -56,26 +63,26 @@ class UploadFeed(APIView):
         return Response(status=200)
 
 
-def DeleteFeed(request, id):
+def DeleteFeed(request, id): # 게시글 삭제
     feed = Feed.objects.get(id=id)
     feed.delete()
     return redirect('/content')
 
-def modify(request, id):
+def modify(request, id): # 게시글 수정
     if request.method == 'POST':
         feed = Feed.objects.get(id=id)
         feed.content = request.POST.get('content')
         feed.save()
         return redirect("/")
 
-def profile(request):
+def profile(request): # 프로필 페이지 접금
     return render(request, 'content/profile.html')
 
 
-def profile_edit_page(request):
+def profile_edit_page(request): # 프로필 수정 페이지 접근
     return render(request, 'content/profile_edit.html')
 
 
-def profile_edit_password(request):
+def profile_edit_password(request): # 비밀번호 변경 페이지 접근
     if request.method == "GET":
         return render(request, 'content/profile_edit_password.html')
