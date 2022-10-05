@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
-from django.http import HttpResponse
 from django.contrib.auth import get_user_model #사용자가 있는지 검사하는 함수
 from django.contrib import auth, messages # 사용자 auth 기능
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.hashers import check_password
+
+
 
 def sign_up_view(request):
     if request.method == 'GET':
@@ -92,4 +93,8 @@ def delete(request):   #회원탈퇴
         request.user.delete()
     return redirect('/')
 
+def test(request):
+    return render(request, 'user/test.html')
 
+      
+ 

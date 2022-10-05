@@ -36,7 +36,6 @@ def content(request):
 class UploadFeed(APIView):
     def post(self, request):
 
-        # 일단 파일 불러와
         file = request.FILES['file']
 
         uuid_name = uuid4().hex

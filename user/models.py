@@ -3,11 +3,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-# Create your models here.
-class UserModel(AbstractUser):
 
+    
+class UserModel(AbstractUser):
+  
     class Meta:
-        db_table = "my_user" # 여기는 테이블 이름이에요! 꼭 기억 해 주세요!
+        db_table = "my_user" # 테이블 이름
         
         
     email = models.EmailField(verbose_name = "email", max_length = 255, unique = True)
@@ -17,3 +18,13 @@ class UserModel(AbstractUser):
     USERNAME_FIELD = 'email' 
     REQUIRED_FIELDS = ['username']
     
+
+
+# class profile(models.Model):
+#     title = models.CharField(max_length=100)
+#     pic = models.FileField(null=True, blank=True, upload_to="")
+    
+#     def __str__(self):
+#         return self.title
+    
+
