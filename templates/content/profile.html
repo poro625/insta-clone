@@ -29,7 +29,7 @@
         <div style="margin-bottom: 20px">
 
             팔로우 : {{ user.followee.count }} 명 / 팔로우 : {{ user.follow.count }} 명
-            
+
         </div>
         <div>
             <b>{{ user.name }}</b>
@@ -96,7 +96,6 @@
 
 
 <script>
-    let files;
     $("#button_feed_list").click(function () {
         $('#feed_list').css({
             display: 'flex'
