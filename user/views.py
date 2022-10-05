@@ -1,3 +1,5 @@
+# user/views.py
+
 from django.shortcuts import render, redirect
 from .models import UserModel
 from django.http import HttpResponse
@@ -12,8 +14,17 @@ import os
 from instagram.settings import MEDIA_ROOT
 from rest_framework.response import Response
 
+""" sign_up_view - 회원가입
+    sign_in_view - 로그인
 
-def sign_up_view(request):
+
+
+
+
+"""
+
+
+def sign_up_view(request):  #회원가입
     if request.method == 'GET':
         return render(request, 'user/signup.html')
     elif request.method == 'POST':
@@ -37,9 +48,7 @@ def sign_up_view(request):
                 UserModel.objects.create_user(email=email, username=username, password=password, nickname=nickname, profile_image=profile_image)
                 return redirect('/sign-in') # 회원가입이 완료되었으므로 로그인 페이지로 이동
     
-
-# user/views.py
-def sign_in_view(request):
+def sign_in_view(request): #로그인
     if request.method == 'POST':
         email = request.POST.get('email', '')
         password = request.POST.get('password', '')
