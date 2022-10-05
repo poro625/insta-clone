@@ -428,7 +428,7 @@
                             <a href="#" role="button" id="dropdownMenuLink"
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="box" style="width: 25px; height: 25px">
-                                    <img class="profile"
+                                    <img class="profile_img"
                                          src="{% get_media_prefix %}{{ user.profile_image }}">
                                 </div>
                             </a>
@@ -492,7 +492,7 @@
                     style="height: 85%; max-height: 520px; border-left: solid 1px gray; display: flex; flex-direction: column;">
                     <div class="feed_name">
                         <div class="profile_box">
-                            <img class="profile_img" src="https://avatars.githubusercontent.com/u/113072884?v=4">
+                            <img class="profile_img" src="{% get_media_prefix %}{{ user.profile_image }}">>
                         </div>
                         <span class="feed_name_txt"> {{ user.nickname }} </span>
                     </div>
@@ -604,7 +604,7 @@
             let image = files[0].name;
             let content = $('#input_feed_content').val();
             let user_id = "{{ user.nickname }}"
-            let profile_image = "https://avatars.githubusercontent.com/u/113072884?v=4"
+            let profile_image = "{{ user.profile_image }}"
             let created_at = new Date();
             let updated_at = new Date();  
 

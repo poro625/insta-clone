@@ -16,7 +16,7 @@
         <div style="background-color: #ffffff; width: 50vw; height: 90vh; min-height: 1000px; border: solid 1px lightgray; border-radius: 0 10px 10px 0;">
             <div style="display: flex; flex-direction: row;">
                 <div style="width: 15vw; height: 4vh; min-height: 40px; margin: 2.5vh 30px 0 0; text-align: right;">
-                    <img class="profile_img" style="border-radius: 50px; width: 40px; height: 40px;" src="https://avatars.githubusercontent.com/u/113072884?v=4">
+                    <img class="profile_img" style="border-radius: 50px; width: 40px; height: 40px;" src="{% get_media_prefix %}{{ user.profile_image }}">
                 </div>
                 <div style="width: 35vw; height: 4vh; min-height: 40px; margin-top: 2.5vh;"> 
                     <b style="font-size: 16pt;">{{ user.nickname }}</b>
@@ -41,10 +41,21 @@
                     </div>
                 </div>
                 <div style="display: flex; flex-direction: row;">
+                    <div style="width: 15vw; height: 10vh; min-height: 100px; margin: 1vh 30px 0 0; text-align: right;"> <b>소개</b> </div>
+                    <div style="width: 35vw; height: 10vh; min-height: 100px; margin-top: 1vh;"><input type="text" style="border: solid 1px lightgray; border-radius: 3px; width: 25vw; height: 10vh; min-height: 100px;"></div>
+                </div>
+                <div style="display: flex; flex-direction: row;">
                     <div style="width: 15vw; height: 4vh; min-height: 40px; margin: 1vh 30px 0 0; text-align: right;"> <b>이메일</b> </div>
                     <div style="width: 35vw; height: 4vh; min-height: 40px;  margin-top: 1vh;"><input type="text" style="border: solid 1px lightgray; border-radius: 3px; width: 25vw;" name="email"></div>
                 </div>
-
+                <div style="display: flex; flex-direction: row;">
+                    <div style="width: 15vw; height: 4vh; min-height: 40px; margin: 1vh 30px 0 0; text-align: right;"> <b>전화번호</b> </div>
+                    <div style="width: 35vw; height: 4vh; min-height: 40px; margin-top: 1vh;"><input type="text" style="border: solid 1px lightgray; border-radius: 3px; width: 25vw;"></div>
+                </div>
+                <div style="display: flex; flex-direction: row;">
+                    <div style="width: 15vw; height: 4vh; min-height: 40px; margin: 1vh 30px 0 0; text-align: right;"> <b>성별</b> </div>
+                    <div style="width: 35vw; height: 4vh; min-height: 40px; margin-top: 1vh;"><input type="text" style="border: solid 1px lightgray; border-radius: 3px; width: 25vw;"></div>
+                </div>
                 <div style="display: flex; flex-direction: row;">
                     <div style="width: 15vw; height: 4vh; min-height: 40px; margin: 1vh 30px 0 0; text-align: right;"></div>
                     <div style="width: 35vw; height: 4vh; min-height: 40px; margin-top: 1vh;"><button type="submit" class="btn btn-primary">제출</button></div>

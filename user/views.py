@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
+from django.http import HttpResponse
 from django.contrib.auth import get_user_model #사용자가 있는지 검사하는 함수
-from django.contrib import auth, messages # 사용자 auth 기능
+from django.contrib import auth # 사용자 auth 기능
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.hashers import check_password
 
+from django.contrib.auth.hashers import check_password
+from rest_framework.views import APIView
+from uuid import uuid4
+import os
+from instagram.settings import MEDIA_ROOT
+from rest_framework.response import Response
 
 
 def sign_up_view(request):
@@ -18,6 +22,7 @@ def sign_up_view(request):
         nickname = request.POST.get('nickname', '')
         password = request.POST.get('password', '')
         password2 = request.POST.get('password2', '')
+        profile_image = "logo.png"
         
         if password != password2:
             return render(request, 'user/signup.html', {'error': '패스워드를 확인 해 주세요!'})
@@ -29,7 +34,7 @@ def sign_up_view(request):
             if exist_email:
                 return render(request, 'user/signup.html', {'error': '이미 존재하는 이메일입니다.'})
             else:
-                UserModel.objects.create_user(email=email, username=username, password=password, nickname=nickname)
+                UserModel.objects.create_user(email=email, username=username, password=password, nickname=nickname, profile_image=profile_image)
                 return redirect('/sign-in') # 회원가입이 완료되었으므로 로그인 페이지로 이동
     
 
@@ -51,6 +56,18 @@ def sign_in_view(request):
             return redirect('/')
         else:
             return render(request, 'user/signin.html')
+
+
+@login_required
+def logout(request):   #로그아웃 함수
+    auth.logout(request) # 인증 되어있는 정보를 없애기
+    return redirect("/")
+
+@login_required
+def delete(request):   #회원탈퇴
+    if request.user.is_authenticated:
+        request.user.delete()
+    return redirect('/')
 
 
 def profile_edit(request, id):  # 사용자 정보 수정(이름,닉네임,이메일)
@@ -82,19 +99,26 @@ def change_password(request, id): # 비밀번호 수정
     else:
         return render(request, 'content/profile_edit_password.html')
 
-@login_required
-def logout(request):   #로그아웃 함수
-    auth.logout(request) # 인증 되어있는 정보를 없애기
-    return redirect("/")
 
-@login_required
-def delete(request):   #회원탈퇴
-    if request.user.is_authenticated:
-        request.user.delete()
-    return redirect('/')
+class UploadProfile(APIView):
+    def post(self, request):
+        print("test")
+        # 일단 파일 불러와
+        file = request.FILES['file']
 
-def test(request):
-    return render(request, 'user/test.html')
+        uuid_name = uuid4().hex
+        save_path = os.path.join(MEDIA_ROOT, uuid_name)
 
-      
- 
+        with open(save_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
+        profile_image = uuid_name
+        nickname = request.data.get('nickname')
+
+        user = UserModel.objects.filter(nickname=nickname).first()
+
+        user.profile_image = profile_image
+        user.save()
+
+        return Response(status=200)
