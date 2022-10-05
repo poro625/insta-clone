@@ -109,9 +109,14 @@ def modify(request, id): # 게시글 수정
         feed.save()
         return redirect("/")
 
-def profile(request): # 프로필 페이지 접금
-    return render(request, 'content/profile.html')
-
+class profile(APIView):
+    def get(self, request):
+        user = request.user.is_authenticated
+        if user:
+            feed_list = Feed.objects.filter(user_id=request.user.nickname).order_by('-created_at')
+            return render(request, 'content/profile.html',{'feed_list':feed_list})
+        else:
+            return redirect('/sign-in')
 
 def profile_edit_page(request): # 프로필 수정 페이지 접근
     return render(request, 'content/profile_edit.html')
