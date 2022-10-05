@@ -6,6 +6,11 @@ from rest_framework.views import APIView
 from .models import Feed
 import os
 from instagram.settings import MEDIA_ROOT
+from django.db.models import Q
+from django.views.generic import ListView, TemplateView
+
+
+
 """ home - home 화면 접근
     content - content 화면 접근
     UploadFeed - 게시글 업로드
@@ -57,10 +62,39 @@ class UploadFeed(APIView): # 게시글 업로드
         
         created_at = request.data.get('created_at')
         updated_at = request.data.get('updated_at')
-
-        Feed.objects.create(image=image, content=content, user_id=user_id, profile_image=profile_image, like_count=0, created_at=created_at, updated_at=updated_at)
+        tags = request.data.get('tag','').split(',')
+        
+        feed_info=Feed.objects.create(image=image, content=content, user_id=user_id, profile_image=profile_image, like_count=0, created_at=created_at, updated_at=updated_at)
+        for tag in tags:
+            tag = tag.strip()
+            if tag !='':
+                feed_info.tags.add(tag)
+        
 
         return Response(status=200)
+def search(request):
+    q = request.POST.get('q', "")  # I am assuming space separator in URL like "random stuff"
+    query = Q(user_id__icontains=q) | Q(content__icontains=q) | Q(tags__name__icontains=q)
+    searched = Feed.objects.filter(query)
+    return render(request, 'searched.html',{'searched':searched, 'q': q })
+
+
+
+class TagCloudTV(TemplateView):
+    template_name = 'taggit/tag_cloud_view.html'
+
+
+class TaggedObjectLV(ListView):
+    template_name = 'taggit/tag_with_post.html'
+    model = Feed
+
+    def get_queryset(self):
+        return Feed.objects.filter(tags__name=self.kwargs.get('tag'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tagname'] = self.kwargs['tag']
+        return context
 
 
 def DeleteFeed(request, id): # 게시글 삭제

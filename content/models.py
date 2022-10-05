@@ -1,7 +1,13 @@
 from django.db import models
+from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase
 
+# Create your models h
+# 
+# ere.
 
-# Create your models here.
+class TaggedFeed(TaggedItemBase):
+    content_object = models.ForeignKey('Feed', on_delete=models.CASCADE)
 class Feed(models.Model):
     content = models.TextField()    # 글내용
     image = models.TextField()  # 피드 이미지
@@ -10,3 +16,11 @@ class Feed(models.Model):
     profile_image = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    
+    
+    ### 태그 추가 부분###
+    tags = TaggableManager(through=TaggedFeed, blank=True)
+
+    def __str__(self):
+        return self.user_id

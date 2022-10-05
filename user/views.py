@@ -122,9 +122,9 @@ class UploadProfile(APIView): # 프로필 사진 업로드
                 destination.write(chunk)
 
         profile_image = uuid_name
-        nickname = request.data.get('nickname')
+        id = request.data.get('id')
 
-        user = UserModel.objects.filter(nickname=nickname).first()
+        user = UserModel.objects.filter(id=id).first()
 
         user.profile_image = profile_image
         user.save()

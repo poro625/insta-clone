@@ -12,4 +12,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/edit/', views.profile_edit_page, name='profile_edit_page'),
     path('profile/edit/password/', views.profile_edit_password, name='profile_edit_password'),
+    path('search/', views.search,name='search'),
+    path('tag/', views.TagCloudTV.as_view(), name='tag_cloud'),
+    path('tag/<str:tag>/', views.TaggedObjectLV.as_view(), name='tagged_object_list'),
 ]
