@@ -41,8 +41,11 @@ def sign_up_view(request):  #회원가입
                 return render(request, 'user/signup.html', {'error': '이메일과 패스워드를 입력해주세요.'})
             
             exist_email = get_user_model().objects.filter(email=email)
+            exist_nickname = get_user_model().objects.filter(nickname=nickname)
             if exist_email:
                 return render(request, 'user/signup.html', {'error': '이미 존재하는 이메일입니다.'})
+            elif exist_nickname:
+                return render(request, 'user/signup.html', {'error': '이미 존재하는 닉네임입니다.'})
             else:
                 UserModel.objects.create_user(email=email, username=username, password=password, nickname=nickname, profile_image=profile_image)
                 return redirect('/sign-in') # 회원가입이 완료되었으므로 로그인 페이지로 이동
@@ -82,7 +85,7 @@ def profile_edit(request, id):  # 사용자 정보 수정(이름,닉네임,이�
     if request.method == 'POST':
         user = UserModel.objects.get(id=id)
         user.username = request.POST.get('username')
-        user.nickname = request.POST.get('nickname')
+        # user.nickname = request.POST.get('nickname')
         user.email = request.POST.get('email')
         user.save()
         return redirect("/")
