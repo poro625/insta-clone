@@ -8,6 +8,7 @@ import os
 from instagram.settings import MEDIA_ROOT
 from django.db.models import Q
 from django.views.generic import ListView, TemplateView
+from .models import TweetComment
 
 
 
@@ -125,3 +126,32 @@ def profile_edit_page(request): # 프로필 수정 페이지 접근
 def profile_edit_password(request): # 비밀번호 변경 페이지 접근
     if request.method == "GET":
         return render(request, 'content/profile_edit_password.html')
+
+
+def detail_tweet(request, id):
+    my_tweet = Feed.objects.get(id=id)
+    tweet_comment = TweetComment.objects.filter(tweet_id=id).order_by('-created_at')
+    return render(request,'home.html',{'feed':my_tweet,'content':tweet_comment})
+
+
+
+def write_comment(request, id):
+    if request.method == 'POST':
+        content = request.POST.get("content","")
+        print(content)
+        current_tweet = Feed.objects.get(id=id)
+
+        TC = TweetComment()
+        TC.content = content
+        TC.user = request.user
+        TC.feed = current_tweet
+        TC.save()
+
+        return redirect("/")
+
+
+def delete_comment(request, id):
+    comment = TweetComment.objects.get(id=id)
+    current_tweet = comment.feed.id
+    comment.delete()
+    return redirect('home.html'+str(current_tweet))
