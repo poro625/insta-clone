@@ -311,7 +311,8 @@
                             <span class="feed_name_txt"> {{ user.nickname }} </span>
                         </div>
                         <form></form>
-                        <form action="/content/modify/{{feed.id}}/" method='POST'>
+                        {% comment %} <form action="/content/modify/{{feed.id}}/" method='POST'> {% endcomment %}
+                        <form action="{% url 'content-modify' feed.id %}" method="POST">
                             {% csrf_token %}
                             <textarea id="input_feed_edit_content"
                                 style="width: 50vh; height: 60%; max-width: 300px; max-height: 360px; min-width: 55%; min-height: 40%; border: none; outline: none; padding-left: 10px;"
@@ -357,7 +358,8 @@
                         </div>
                         <span class="feed_name_txt"> {{ user.nickname }} </span>
                     </div>
-                    <form action="/content/modify/{{feed.id}}/" method='POST'>
+                    {% comment %} <form action="/content/modify/{{feed.id}}/" method='POST'> {% endcomment %}
+                    <form action="{% url 'content-modify' feed.id %}" method="POST">
                         {% csrf_token %}
                         <textarea id="input_feed_edit_content"
                             style="width: 50vh; height: 60%; max-width: 300px; max-height: 360px; min-width: 55%; min-height: 40%; border: none; outline: none; padding-left: 10px;"
