@@ -23,7 +23,7 @@
                 </div>
             </div>
             <form></form>
-            <form action="/user/edit/{{ user.id }}/" method="POST">
+            <form action="/user/edit/{{ user.id }}/" method='POST'>
                 {% csrf_token %}
                 <div style="display: flex; flex-direction: row;">
                     <div style="width: 15vw; height: 12vh; min-height: 120px; margin: 1vh 30px 0 0; text-align: right;"> <b>이름</b> </div>
@@ -40,16 +40,14 @@
                         <div style="font-size: 10pt; color: gray; width: 25vw;">대부분의 경우 이후 14일 동안 사용자 이름을 다시 {{ user.nickname }}(으)로 변경할 수 있습니다.</div>
                     </div>
                 </div>
-            
                 <div style="display: flex; flex-direction: row;">
                     <div style="width: 15vw; height: 4vh; min-height: 40px; margin: 1vh 30px 0 0; text-align: right;"> <b>이메일</b> </div>
-                    <div style="width: 35vw; height: 4vh; min-height: 40px;  margin-top: 1vh;">
-                    <input type="text" style="border: solid 1px lightgray; border-radius: 3px; width: 25vw;" name="email"></div>
+                    <div style="width: 35vw; height: 4vh; min-height: 40px;  margin-top: 1vh;"><input type="text" style="border: solid 1px lightgray; border-radius: 3px; width: 25vw;" name="email"></div>
                 </div>
+
                 <div style="display: flex; flex-direction: row;">
                     <div style="width: 15vw; height: 4vh; min-height: 40px; margin: 1vh 30px 0 0; text-align: right;"></div>
-                    <div style="width: 35vw; height: 4vh; min-height: 40px; margin-top: 1vh;">
-                    <button type="submit" class="btn btn-primary">제출</button></div>
+                    <div style="width: 35vw; height: 4vh; min-height: 40px; margin-top: 1vh;"><button type="submit" class="btn btn-primary">제출</button></div>
                 </div>
             </form>
         </div>
@@ -62,18 +60,14 @@
         window.location.href = "/profile/edit";
     })
 
-    $('#user_password_change').click(function () { 
+    $('#user_password_change').click(function () {
         window.location.href = "/profile/edit/password";
     })
 
     $('#user_delete').click(function () {
         window.location.href = "/delete";
     })
-
-
-
-    
 </script>
 
- 
+
 {% endblock %}
