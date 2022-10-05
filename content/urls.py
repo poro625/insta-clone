@@ -14,5 +14,4 @@ urlpatterns = [
     # Update
     path('content/modify/<int:id>/', views.modify, name='modify'),
     
-    path('test/', views.test, name='test'),
 ]

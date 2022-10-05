@@ -79,6 +79,3 @@ def modify(request, id):
         feed.content = request.POST.get('content')
         feed.save()
         return redirect("/")
-    
-def test(request):
-    return render(request, 'content/test.html')
