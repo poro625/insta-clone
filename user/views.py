@@ -1,12 +1,9 @@
 # user/views.py
-
 from django.shortcuts import render, redirect
 from .models import UserModel
-from django.http import HttpResponse
 from django.contrib.auth import get_user_model #사용자가 있는지 검사하는 함수
 from django.contrib import auth # 사용자 auth 기능
 from django.contrib.auth.decorators import login_required
-
 from django.contrib.auth.hashers import check_password
 from rest_framework.views import APIView
 from uuid import uuid4
@@ -16,10 +13,12 @@ from rest_framework.response import Response
 
 """ sign_up_view - 회원가입
     sign_in_view - 로그인
-
-
-
-
+    logout - 로그아웃
+    delete - 회원탈퇴
+    profile_edit - 사용자 정보 수정
+    change_password - 비밀번호 변경
+    UploadProfile - 프로필 사진 변경
+    user_view, user_follow - 팔로우, 팔로워
 
 """
 
