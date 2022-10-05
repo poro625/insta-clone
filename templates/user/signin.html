@@ -94,6 +94,7 @@
                 {% endif %}
                 <div style="">
                     <a href="{% provider_login_url 'google' %}" style="font-weight: bold;">구글 로그인</a><br>
+                    {% comment %} <a href="{% provider_login_url "openid" openid="https://www.google.com/accounts/o8/id" next="/success/url/" %}">Google</a> {% endcomment %}
                 </div>
 
         </div>

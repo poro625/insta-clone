@@ -9,6 +9,7 @@ from django.conf import settings
 
 class TaggedFeed(TaggedItemBase):
     content_object = models.ForeignKey('Feed', on_delete=models.CASCADE)
+    
 class Feed(models.Model):
     content = models.TextField()    # 글내용
     image = models.TextField()  # 피드 이미지
