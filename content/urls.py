@@ -15,4 +15,6 @@ urlpatterns = [
     path('tag/', views.TagCloudTV.as_view(), name='tag_cloud'),
     path('tag/<str:tag>/', views.TaggedObjectLV.as_view(), name='tagged_object_list'),
     path('profile/', profile.as_view()),
+    path('tweet/<int:id>/', views.detail_tweet, name="detail_tweet"), #댓글
+    path('tweet/comment/<int:id>/', views.write_comment, name="write_comment"), #댓글작성
 ]
